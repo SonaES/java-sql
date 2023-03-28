@@ -1,0 +1,53 @@
+body{
+    text-align: center;
+    background-color:rgb(171, 171, 216) ;
+    background-image: url("d.jfif");
+        background-repeat: no-repeat;
+        background-size:cover;
+        background-position: center;
+        background-attachment: fixed;
+        
+}
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  label {
+    flex: 0 0 30%;
+    text-align: right;
+    margin-right: 10px;
+  }
+  
+  input,
+  select {
+    flex: 0 0 65%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  button[type="submit"] {
+    
+    color: #643a3a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button, input[type="submit"] {
+    background-color: #05582f; /* Replace with your desired color */
+    color: #fff; /* Optionally, change the text color */
+    border: none; /* Optionally, remove the border */
+    padding: 10px 20px; /* Optionally, adjust the padding */
+
+  }
+  
+  
+  
+  

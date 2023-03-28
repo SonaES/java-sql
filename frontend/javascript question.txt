@@ -1,0 +1,201 @@
+function romanToDecimal(roman) {
+  // create an object to map Roman numerals to decimal values
+  const romanNumerals = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000
+  };
+
+  let result = 0;
+  let prevValue = 0;
+
+  // loop through the input string from right to left
+  for (let i = roman.length - 1; i >= 0; i--) {
+    const currentValue = romanNumerals[roman[i]];
+
+    // if the current value is greater than or equal to the previous value, add it to the result
+    if (currentValue >= prevValue) {
+      result += currentValue;
+    } 
+    // otherwise, subtract it from the result
+    else {
+      result -= currentValue;
+    }
+
+    prevValue = currentValue;
+  }
+
+  return result;
+}
+console.log(romanToDecimal('IV')); // Output: 4
+console.log(romanToDecimal('IX')); // Output: 9
+console.log(romanToDecimal('XL')); // Output: 40
+console.log(romanToDecimal('XC')); // Output: 90
+console.log(romanToDecimal('CM')); // Output: 900
+console.log(romanToDecimal('MCMXCIV')); // Output: 1994
+
+
+
+
+function romanToNumber(romanNumeral) {
+  const romanToDecimal = {
+    'M': 1000,
+    'CM': 900,
+    'D': 500,
+    'CD': 400,
+    'C': 100,
+    'XC': 90,
+    'L': 50,
+    'XL': 40,
+    'X': 10,
+    'IX': 9,
+    'V': 5,
+    'IV': 4,
+    'I': 1
+  };
+
+  let result = 0;
+  for (let i = 0; i < romanNumeral.length; i++) {
+    const currentSymbol = romanNumeral[i];
+    const nextSymbol = romanNumeral[i + 1];
+
+    if (romanToDecimal[currentSymbol] < romanToDecimal[nextSymbol]) {
+      result -= romanToDecimal[currentSymbol];
+    } else {
+      result += romanToDecimal[currentSymbol];
+    }
+  }
+
+  return result;
+}
+const decimalValue = romanToNumber('XXIV');
+console.log(decimalValue);
+
+
+
+
+function findPairs(inputList, targetNumber) {
+  const pairs = [];
+
+  for (let i = 0; i < inputList.length; i++) {
+    for (let j = i + 1; j < inputList.length; j++) {
+      if (inputList[i] + inputList[j] === targetNumber) {
+        pairs.push([inputList[i], inputList[j]]);
+      }
+    }
+  }
+
+  return pairs;
+}
+const inputList = [2, 7, 4, 0, 9, 5, 1, 3];
+const targetNumber = 9;
+
+const pairs = findPairs(inputList, targetNumber);
+console.log(pairs); // [[2, 7], [4, 5], [0, 9], [1, 8]]
+
+
+
+
+
+function reverseString(str) {
+  // Check if string contains non-ASCII characters
+  if (!/^[\x00-\x7F]*$/.test(str)) {
+    throw new Error('Input contains non-ASCII characters.');
+  }
+  // Reverse the string using Array.reverse() and String.join()
+  return str.split('').reverse().join('');
+}
+console.log(reverseString('hello')); // Output: 'olleh'
+console.log(reverseString('world')); // Output: 'dlrow'
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <style>
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Registration Form</h1>
+    <form onsubmit="return validateForm()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+      <span id="nameError" class="error"></span><br><br>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password">
+      <span id="passwordError" class="error"></span><br><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+      <span id="emailError" class="error"></span><br><br>
+
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" name="phoneNumber">
+      <span id="phoneNumberError" class="error"></span><br><br>
+
+      <input type="submit" value="Submit">
+    </form>
+    <script>
+      function validateForm() {
+        let name = document.forms[0]["name"].value;
+        let password = document.forms[0]["password"].value;
+        let email = document.forms[0]["email"].value;
+        let phoneNumber = document.forms[0]["phoneNumber"].value;
+
+        let nameRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+        let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let phoneNumberRegex = /^\d{10}$/;
+
+        let errors = [];
+
+        if (!nameRegex.test(name)) {
+          errors.push("Invalid name format");
+          document.getElementById("nameError").innerHTML = "Invalid name format";
+        } else {
+          document.getElementById("nameError").innerHTML = "";
+        }
+
+        if (!passwordRegex.test(password)) {
+          errors.push("Invalid password format. Password must be at least 8 characters long and contain at least one letter and one number");
+          document.getElementById("passwordError").innerHTML = "Invalid password format. Password must be at least 8 characters long and contain at least one letter and one number";
+        } else {
+          document.getElementById("passwordError").innerHTML = "";
+        }
+
+        if (!emailRegex.test(email)) {
+          errors.push("Invalid email format");
+          document.getElementById("emailError").innerHTML = "Invalid email format";
+        } else {
+          document.getElementById("emailError").innerHTML = "";
+        }
+
+        if (!phoneNumberRegex.test(phoneNumber)) {
+          errors.push("Invalid phone number format. Phone number must be 10 digits long");
+          document.getElementById("phoneNumberError").innerHTML = "Invalid phone number format. Phone number must be 10 digits long";
+        } else {
+          document.getElementById("phoneNumberError").innerHTML = "";
+        }
+
+        if (errors.length > 0) {
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>
+
